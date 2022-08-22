@@ -860,14 +860,14 @@ bool cassie_mujoco_init(const char *file_input)
 
         mujoco_initialized = true;
     }
-    // Initialize GLFW if it was loaded
-    if (glfw_handle && !glfw_initialized) {
-        if (!glfwInit_fp()) {
-            //fprintf(stderr, "Could not initialize GLFW\n");
-            return false;
-        }
-        glfw_initialized = true;
-    }
+    // // Initialize GLFW if it was loaded
+    // if (glfw_handle && !glfw_initialized) {
+    //     if (!glfwInit_fp()) {
+    //         //fprintf(stderr, "Could not initialize GLFW\n");
+    //         return false;
+    //     }
+    //     glfw_initialized = true;
+    // }
     return mujoco_initialized;
 }
 
