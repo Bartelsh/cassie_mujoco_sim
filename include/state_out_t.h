@@ -31,8 +31,8 @@ typedef struct {
   double orientation[4];
   double footRotationalVelocity[3];
   double footTranslationalVelocity[3];
-  double toeForce[3];
-  double heelForce[3];
+  double toeForce[3]; // same as heelforce below
+  double heelForce[3]; // same as toeforce above
 } state_foot_out_t;
 
 typedef struct {
