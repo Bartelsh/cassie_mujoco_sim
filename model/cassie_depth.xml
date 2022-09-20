@@ -239,7 +239,7 @@
     
     
     <!-- Add any other moving bodies after the Cassie definition -->
-    <geom name='test' pos='1 0 0.25' size='0.25 0.25 0.25' type='box' condim='3' conaffinity='15'/>
+    <!-- <geom name='test' pos='1 0 0.25' size='0.25 0.25 0.25' type='box' condim='3' conaffinity='15'/> -->
 
     <geom name='box1'  pos='0 0 -1.01'  size='10 10 1' type='box' condim='3' conaffinity='15'/>
     <geom name='box2'  pos='0 0 -1.01'  size='10 10 1' type='box' condim='3' conaffinity='15'/>
