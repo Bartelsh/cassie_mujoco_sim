@@ -12,40 +12,19 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-from cassiemujoco_ctypes import *
+from .cassiemujoco_ctypes import *
 import os
 import ctypes
 import numpy as np
 
 
-# Get base directory
-_dir_path = os.path.dirname(os.path.realpath(__file__))
-
-# Initialize libcassiesim
-default_model = "../model/cassie.xml"
-path = os.path.abspath(os.path.join(_dir_path, default_model))
-cassie_mujoco_init(str.encode(path))
-
-# Interface classes
-# Note: Making the optional argument be a global var be default is perhaps not the safest thing to do
 class CassieSim:
-    def __init__(self, modelfile=default_model, terrain=False, perception=False, reinit=False):
-
-        if modelfile is not default_model:
-            self.modelfile = modelfile
-        else:
-            base = 'cassie'
-            if perception:
-                base += '_perception'
-            if terrain:
-                base += '_hfield'
-            self.modelfile = os.path.join(_dir_path, "../model", base + '.xml')
-
+    def __init__(self, xml_file="cassie2.xml"):
+        _dir_path = os.path.dirname(os.path.realpath(__file__))
+        self.modelfile = os.path.join(_dir_path, "model", xml_file)
+        
+        cassie_mujoco_init(str.encode(self.modelfile))
         self.c = cassie_sim_init(self.modelfile.encode('utf-8'), True)
-
-        if terrain:
-            x_res, y_res = self.get_hfield_nrow(), self.get_hfield_ncol()
-            self.hfields = generate_perlin(x_res, y_res)
 
         params_array = (ctypes.c_int32 * 6)()
         cassie_sim_params(self.c, params_array)
@@ -53,11 +32,6 @@ class CassieSim:
         self.nbody = cassie_sim_nbody(self.c)
         self.nq = cassie_sim_nq(self.c)
         self.ngeom = cassie_sim_ngeom(self.c)
-
-    def randomize_terrain(self):
-        hfield = self.hfields[np.random.randint(len(self.hfields))]
-        self.set_hfield_data(hfield.flatten())
-        return hfield
 
     def step(self, u):
         y = cassie_out_t()
@@ -777,6 +751,41 @@ class CassieVis:
 
     def __del__(self):
         cassie_vis_free(self.v)
+
+
+class CassieState:
+    def __init__(self):
+        self.s = cassie_state_alloc()
+
+    def time(self):
+        timep = cassie_state_time(self.s)
+        return timep[0]
+
+    def qpos(self):
+        qposp = cassie_state_qpos(self.s)
+        return qposp[:35]
+
+    def qvel(self):
+        qvelp = cassie_state_qvel(self.s)
+        return qvelp[:32]
+
+    def set_time(self, time):
+        timep = cassie_state_time(self.s)
+        timep[0] = time
+
+    def set_qpos(self, qpos):
+        qposp = cassie_state_qpos(self.s)
+        for i in range(min(len(qpos), 35)):
+            qposp[i] = qpos[i]
+
+    def set_qvel(self, qvel):
+        qvelp = cassie_state_qvel(self.s)
+        for i in range(min(len(qvel), 32)):
+            qvelp[i] = qvel[i]
+
+    def __del__(self):
+        cassie_state_free(self.s)
+
 
 class CassieUdp:
     def __init__(self, remote_addr='127.0.0.1', remote_port='25000',
