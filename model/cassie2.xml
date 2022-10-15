@@ -66,12 +66,12 @@
     <mesh name='right-foot-crank'   scale='1 1 -1' file='foot-crank.stl'/>
     <mesh name='right-plantar-rod'  scale='1 1 -1' file='plantar-rod.stl'/>
     <mesh name='right-foot'         scale='1 1 -1' file='foot.stl'/>
-    <hfield name='hf1' nrow='200' ncol='400' size="10 5 1 2"/>
+    <hfield name='hf1' nrow='200' ncol='400' size="10 5 3 1"/>
   </asset>
 
   <worldbody>
     <body name='floor' pos='0 0 0'>
-        <geom name='hfield1' pos='5 0 0' hfield='hf1'  type='hfield' material='plane' condim='3' conaffinity='15'/>
+        <geom name='hfield1' pos='5 0 -1' hfield='hf1'  type='hfield' material='plane' condim='3' conaffinity='15'/>
     </body>
 
     <light mode='trackcom' pos='0 0 5' dir='0 0 -1'/>
