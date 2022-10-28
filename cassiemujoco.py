@@ -190,6 +190,11 @@ class CassieSim:
         for i in range(12):
             vel[i] = vel_array[i]
 
+    def get_foot_vel(self):
+        vel = np.zeros(12)
+        self.foot_vel(vel)
+        return vel
+
     def body_vel(self, vel, body_name):
         vel_array = (ctypes.c_double * 6)()
         cassie_sim_body_vel(self.c, vel_array, body_name.encode())
