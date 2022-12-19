@@ -53,7 +53,7 @@
     <mesh name='left-heel-spring'  file='heel-spring.stl'/>
     <mesh name='left-foot-crank'   file='foot-crank.stl'/>
     <mesh name='left-plantar-rod'  file='plantar-rod.stl'/>
-    <mesh name='left-foot'         file='foot.stl'/>
+    <mesh name='left-foot'         file='foot_reoriented_2.stl'/>
     <mesh name='right-hip-roll'     scale='1 -1 1' file='hip-roll.stl'/>
     <mesh name='right-hip-yaw'      scale='1 -1 1' file='hip-yaw.stl'/>
     <mesh name='right-hip-pitch'    scale='1 1 -1' file='hip-pitch.stl'/>
@@ -65,7 +65,7 @@
     <mesh name='right-heel-spring'  scale='1 1 -1' file='heel-spring.stl'/>
     <mesh name='right-foot-crank'   scale='1 1 -1' file='foot-crank.stl'/>
     <mesh name='right-plantar-rod'  scale='1 1 -1' file='plantar-rod.stl'/>
-    <mesh name='right-foot'         scale='1 1 -1' file='foot.stl'/>
+    <mesh name='right-foot'         scale='1 1 -1' file='foot_reoriented_2.stl'/>
     <hfield name='hf1' nrow='200' ncol='400' size="10 5 4 1"/>
   </asset>
 
@@ -149,14 +149,14 @@
                       <geom type='mesh' mesh='left-plantar-rod'/>
                     </body>
                   </body>
-                  <body name='left-foot' pos='0.408 -0.04 0'>
-                    <inertial pos='0.00474 0.02748 -0.00014' mass='0.1498' fullinertia='0.00017388 0.00016793 0.00033261 0.00011814 1.36e-06 -4e-07'/>
+                  <body name='left-foot' pos='0.408 -0.04 0' quat="0.90630779 0 0 0.42261826">
+                    <inertial pos='0.00474 0.02748 -0.00014' mass='0.1498' fullinertia='0.00017388 0.00016793 0.00033261 0.00011814 1.36e-06 -4e-07'/> <!-- this is probably incorrect -->
                     <joint name='left-foot' type='hinge' range='-140 -30' damping='1' armature='0.01225'/>
                     <geom type='mesh' mesh='left-foot'/>
-                    <geom type='capsule' size='0.02' fromto='-0.052821 0.092622 0 0.069746 -0.010224 0' class='collision-left'/>
-                    <site name="left-foot-pt" type="sphere" pos="0.01965 0.05375 0" size="0.005" rgba="0.7 0.2 0.1 1"/>
-                    <site name="left-toe" type="sphere" pos="-0.052821 0.092622 0" size="0.005" rgba="0.7 0.2 0.1 1"/>
-                    <site name="left-heel" type="sphere" pos="0.069746 -0.010224 0" size="0.005" rgba="0.7 0.2 0.1 1"/>
+                    <geom type='capsule' size='0.02' fromto='0.03699988407931327 0.09999950751437418 0 0.03874202409802952 -0.058890493806621286 0' class='collision-left'/>
+                    <site name="left-foot-pt" type="sphere" pos="0.05380566534798557 0.019497060713363566, 0" size="0.005" rgba="0.7 0.2 0.1 1"/>
+                    <site name="left-toe" type="sphere" pos="0.03699988407931327 0.09999950751437418 0" size="0.005" rgba="0.7 0.2 0.1 1"/>
+                    <site name="left-heel" type="sphere" pos="0.03874202409802952 -0.058890493806621286 0" size="0.005" rgba="0.7 0.2 0.1 1"/>
                   </body>
                 </body>
               </body>
@@ -215,14 +215,14 @@
                       <geom type='mesh' mesh='right-plantar-rod'/>
                     </body>
                   </body>
-                  <body name='right-foot' pos='0.408 -0.04 0'>
-                    <inertial pos='0.00474 0.02748 0.00014' mass='0.1498' fullinertia='0.00017388 0.00016793 0.00033261 0.00011814 -1.36e-06 4e-07'/>
+                  <body name='right-foot' pos='0.408 -0.04 0' quat="0.90630779 0 0 0.42261826">
+                    <inertial pos='0.00474 0.02748 0.00014' mass='0.1498' fullinertia='0.00017388 0.00016793 0.00033261 0.00011814 -1.36e-06 4e-07'/>  
                     <joint name='right-foot' type='hinge' range='-140 -30' damping='1' armature='0.01225'/>
                     <geom type='mesh' mesh='right-foot'/>
-                    <geom type='capsule' size='0.02' fromto='-0.052821 0.092622 0 0.069746 -0.010224 0' class='collision-right'/>
-                    <site name="right-foot-pt" type="sphere" pos="0.01965 0.05375 0" size="0.005" rgba="0.1 0.7 0.2 1"/>
-                    <site name="right-toe" type="sphere" pos="-0.052821 0.092622 0.0" size="0.005" rgba="0.1 0.7 0.2 1"/>
-                    <site name="right-heel" type="sphere" pos="0.069746 -0.010224 0" size="0.005" rgba="0.1 0.7 0.2 1"/>
+                    <geom type='capsule' size='0.02' fromto='0.03699988407931327 0.09999950751437418 0 0.03874202409802952 -0.058890493806621286 0' class='collision-right'/>
+                    <site name="right-foot-pt" type="sphere" pos="0.05380566534798557 0.019497060713363566, 0" size="0.005" rgba="0.1 0.7 0.2 1"/>
+                    <site name="right-toe" type="sphere" pos="0.03699988407931327 0.09999950751437418 0" size="0.005" rgba="0.1 0.7 0.2 1"/>
+                    <site name="right-heel" type="sphere" pos="0.03874202409802952 -0.058890493806621286 0" size="0.005" rgba="0.1 0.7 0.2 1"/>
                   </body>
                 </body>
               </body>
